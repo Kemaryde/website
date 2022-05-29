@@ -14,32 +14,18 @@
         <p>Eintrag entfernen</p>
       </div>
     </div>
-    <div class="item">
-      <h2 class="title">Titel</h2>
-      <img src="https://s.jlosch.de/images-jlosch.de/missing-picture.svg" alt="" class="image">
-      <div class="description">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, suscipit. Necessitatibus odio molestias voluptatem, sed ullam molestiae, nesciunt fugit repudiandae saepe deleniti distinctio, at sunt officia esse rem modi. Laboriosam.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo sed aperiam aliquam dolor ducimus unde aliquid praesentium atque soluta, eius provident eligendi voluptatibus. Praesentium, quia rerum officia provident minima omnis.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo voluptatibus saepe nulla accusantium corrupti, debitis impedit sit ipsa autem aliquid distinctio, ullam, facere quis quibusdam minima doloremque provident a tempore?
-      </div>
-      <div class="tags">
-        <p class="tag">
-          test
-        </p>
-        <p class="tag">
-          test
-        </p>
-        <p class="tag">
-          test
-        </p>
-      </div>
-    </div>
+    <Item title="test" :tags="tags" amount="0" />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage'
+  name: 'IndexPage',
+  data () {
+    return {
+      tags: [{ name: 'test1' }, { name: 'test2' }]
+    }
+  }
 }
 </script>
 <style lang="stylus" scoped>
@@ -73,38 +59,4 @@ export default {
         text-align: center
         min-width: 20rem
         background-color lightgreen
-  .item
-    margin-top 2rem
-    border 1px solid black
-    border-radius 4rem
-    padding 5rem
-    min-height: 20rem
-    max-width: 20%
-    .title
-      margin-top -3rem
-      font-size 16pt
-      text-align: center
-    .image
-      margin-top 2rem
-      border 1px solid black
-      border-radius 4rem
-      min-height: 10rem
-    .description
-      margin-top 2rem
-      text-overflow: ellipsis
-      overflow: hidden
-      max-height: 5rem
-      overflow:hidden;
-      text-overflow: ellipsis;
-      white-space: wrap;
-    .tags
-      margin-top 0.5rem
-      display inline-flex
-      flex-direction row
-      gap .5rem
-      .tag
-        background rgba(193, 152, 117, 0.6)
-        border-radius 1rem
-        padding .5rem
-        width: initial
 </style>

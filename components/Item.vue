@@ -1,15 +1,17 @@
 <template>
   <div class="item">
     <h2 class="title">
-      {{ title }}
+      {{ item.name }}
     </h2>
+    <strong>{{item.barcode}}</strong><br />
+    <p>Hersteller: {{item.fracturedBy}}</p>
     <strong v-if="amount != 0">Anzahl: {{ amount }}</strong>
-    <img :src="image" alt="" class="image">
+    <img :src="item.imageURL" alt="" class="image">
     <div class="description" v-if="description !== ''">
-      <p>{{ description }}</p>
+      <p>{{ item.description }}</p>
     </div>
     <div class="tags">
-      <p class="tag" v-for="tag in tags" :key="tag.name">
+      <p class="tag" v-for="tag in item.tagList" :key="tag.name">
         {{ tag.name }}
       </p>
     </div>
@@ -19,6 +21,10 @@
 <script>
 export default {
   props: {
+    item: {
+      type: Object,
+      default: {}
+    },
     title: {
       default: '',
       type: String
@@ -59,6 +65,7 @@ export default {
     border 1px solid black
     border-radius 4rem
     min-height: 10rem
+    max-width: 25rem
   .description
     margin-top 2rem
     text-overflow: ellipsis

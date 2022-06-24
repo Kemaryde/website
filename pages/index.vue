@@ -8,17 +8,13 @@
         <path d="M32.8759 28.9308H30.7982L30.0618 28.2207C32.6392 25.2224 34.191 21.3299 34.191 17.0955C34.191 7.65352 26.5374 0 17.0955 0C7.65352 0 0 7.65352 0 17.0955C0 26.5374 7.65352 34.191 17.0955 34.191C21.3299 34.191 25.2224 32.6392 28.2207 30.0618L28.9308 30.7982V32.8759L42.0812 46L46 42.0812L32.8759 28.9308ZM17.0955 28.9308C10.5466 28.9308 5.26015 23.6444 5.26015 17.0955C5.26015 10.5466 10.5466 5.26015 17.0955 5.26015C23.6444 5.26015 28.9308 10.5466 28.9308 17.0955C28.9308 23.6444 23.6444 28.9308 17.0955 28.9308Z" fill="black"/>
       </svg>
     </div>
-    <SettingsIcon />
+    <SettingsIcon @click="$root.$emit('click-settings')"" />
     <div class="box">
       <div class="box-content">
         <p @click.prevent="openSettings()">Eintrag hinzufügen</p>
-        <p>Eintrag entfernen</p>
+        <p @click.prevent="$root.$emit('click-settings')">Eintrag entfernen</p>
       </div>
     </div>
-    <Popup
-      v-show="isModalVisible"
-      @close="closeModal"
-    />
     <div class="item-container">
       <Item v-for="item in items" :key="item.name" :item="item"/>
     </div>
@@ -41,6 +37,9 @@ export default {
   },
   created() {
     this.getItems()
+    if(localStorage.getItem('showImages') === null){
+      localStorage.setItem('showImages', true)
+    }
   },
   methods: {
     getItems () {
@@ -48,15 +47,6 @@ export default {
         this.items = response.data
         console.log(response.data)
       }).catch(error => {console.log(error)})
-    },
-    openSettings () {
-      this.showModal()
-    },
-    showModal() {
-      this.isModalVisible = true;
-    },
-    closeModal() {
-      this.isModalVisible = false;
     }
   }
 }
@@ -94,6 +84,6 @@ export default {
         background-color lightgreen
   .item-container
     display: flex;
-    flex-direction: row;
     gap 2rem
+    flex-wrap: wrap
 </style>

@@ -5,9 +5,10 @@
     </h2>
     <strong>{{item.barcode}}</strong><br />
     <p>Hersteller: {{item.fracturedBy}}</p>
-    <strong v-if="amount != 0">Anzahl: {{ amount }}</strong>
-    <img :src="item.imageURL" alt="" class="image">
-    <div class="description" v-if="description !== ''">
+    <strong v-if="item.amount != 0">Anzahl: {{ item.amount }}</strong>
+    <div v-if="showImages">test</div>
+    <img :src="item.imageURL" alt="" class="image" v-show="showImages">
+    <div class="description" v-if="item.description !== ''">
       <p>{{ item.description }}</p>
     </div>
     <div class="tags">
@@ -24,25 +25,17 @@ export default {
     item: {
       type: Object,
       default: {}
-    },
-    title: {
-      default: '',
-      type: String
-    },
-    image: {
-      default: 'https://s.jlosch.de/images-jlosch.de/missing-picture.svg',
-      type: String
-    },
-    amount: {
-      type: Number,
-      default: 0
-    },
-    description: {
-      type: String,
-      default: ''
-    },
-    tags: {
-      type: Object
+    }
+  },
+  data () {
+    return {
+      showImages: false
+    }
+  },
+  mounted () {
+    if(process.client) {
+      this.showImages = localStorage.getItem("showImages")
+      console.log(localStorage.getItem("showImages"))
     }
   }
 }

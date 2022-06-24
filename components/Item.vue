@@ -5,9 +5,10 @@
     </h2>
     <strong>{{item.barcode}}</strong><br />
     <p>Hersteller: {{item.fracturedBy}}</p>
-    <strong v-if="item.amount != 0">Anzahl: {{ item.amount }}</strong>
-    <div v-if="showImages">test</div>
-    <img :src="item.imageURL" alt="" class="image" v-show="showImages">
+    <strong v-show="item.amount != 0 && item.amount != null">Anzahl: {{ item.amount }}</strong>
+    <div class="placeholder-amount" v-show="item.amount === 0 && item.amount == null"></div>
+    <img :src="item.imageURL" alt="" class="image" v-if="showImages == 'true'">
+    <div class="placeholder-image" v-show="showImages =='false'"></div>
     <div class="description" v-if="item.description !== ''">
       <p>{{ item.description }}</p>
     </div>
@@ -29,13 +30,12 @@ export default {
   },
   data () {
     return {
-      showImages: false
+      showImages: null
     }
   },
   mounted () {
     if(process.client) {
       this.showImages = localStorage.getItem("showImages")
-      console.log(localStorage.getItem("showImages"))
     }
   }
 }
@@ -58,7 +58,11 @@ export default {
     border 1px solid black
     border-radius 4rem
     min-height: 10rem
-    max-width: 25rem
+    width 100%
+  .placeholder-image
+    min-height: 10rem
+  .placeholder-amount
+    min-height: 2rem
   .description
     margin-top 2rem
     text-overflow: ellipsis

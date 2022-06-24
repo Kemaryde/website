@@ -24,11 +24,19 @@ export default {
     }
   },
   mounted () {
+    this.settings.showImages = localStorage.getItem('showImages')
     this.$root.$on('click-settings', () => {
       if(this.isModalVisible){
-        this.isModalVisible = false
+        this.closeModal()
       }else{
-        this.isModalVisible = true
+        this.showModal()
+      }
+    })
+    this.$root.$on('close-modal', () => {
+      if(this.isModalVisible){
+        this.closeModal()
+      }else{
+        this.showModal()
       }
     })
   },

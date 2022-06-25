@@ -65,7 +65,7 @@ export default {
               tags: '',
               type: 'NULL'
             },
-            isAddItemOpen: true,
+            isAddItemOpen: false,
         };
     },
     created() {

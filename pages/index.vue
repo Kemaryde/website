@@ -137,9 +137,7 @@ export default {
         min-width: 20rem
         background-color lightgreen
   .addItem
-    color blue
     .form
-      background-color orange
       display flex
       flex-direction column
       gap 1rem

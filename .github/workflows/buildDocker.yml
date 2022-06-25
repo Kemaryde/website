@@ -27,4 +27,4 @@ jobs:
           registry: https://registry.jlosch.de
           username: ${{ secrets.REGISTRY_NAME }}
           password: ${{ secrets.REGISTRY_TOKEN }}
-          name: registry.jlosch.de/jlosch.de/website:${{env.GITHUB_REF_SLUG}}
+          name: registry.jlosch.de/kemary.de/website:${{env.GITHUB_REF_SLUG}}

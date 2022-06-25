@@ -21,7 +21,7 @@ export default {
   ],
   ssr: false,
   publicRuntimeConfig: {
-    apiURL: process.env.API_URL === undefined ? 'https://test.kemary.de' : process.env.API_URL
+    apiURL: process.env.API_URL === undefined ? 'https://test.kemary.de/api' : process.env.API_URL
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

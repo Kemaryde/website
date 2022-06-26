@@ -11,7 +11,7 @@
     <SettingsIcon @click="$root.$emit('click-settings')" />
     <div class="box">
       <div class="box-content">
-        <p @click="openAddItem">Eintrag hinzufügen</p>
+        <p @click="openAddItem">Item hinzufügen</p>
         <p>Eintrag entfernen</p>
       </div>
     </div>

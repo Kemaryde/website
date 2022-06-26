@@ -1,5 +1,5 @@
 <template>
-  <div class="item">
+  <div class="item" @click.prevent="openAddStorage">
     <h2 class="title">
       {{ item.name }}
     </h2>
@@ -17,7 +17,43 @@
         {{ tag.name }}
       </p>
     </div>
-    <button class="edit">Bearbeiten</button>
+    <Popup
+      v-show="isStorageVisible"
+      @close-modal="closeAddStorage"
+    >
+      <div class="storage">
+        <h4>{{item.name}}</h4>
+        <div class="storage-item">
+          <label for="location">Lagerort</label>
+          <select
+            id="location"
+            name="location"
+            required="required"
+            v-model="newStorage.location"
+          >
+            <option value="null" selected disabled>
+              AUSWÄHLEN
+            </option>
+            <option v-for="location in locations" :key="location.key" :value="location.name">
+              {{location.name}}
+            </option>
+          </select>
+        </div>
+        <div class="storage-item">
+          <label for="boughtAt">Gekauft am</label>
+          <input type="date" v-model="newStorage.boughtAt" />
+        </div>
+        <div class="storage-item">
+          <label for="boughtAt">Läuft ab am am</label>
+          <input type="date" v-model="newStorage.expiresOn" />
+        </div>
+        <div class="storage-item">
+          <label for="count">Anzahl</label>
+          <input id="count" v-model="newStorage.count" type="number" />
+        </div>
+        <button @click="addStorage">Absenden</button>
+      </div>
+    </Popup>
   </div>
 </template>
 
@@ -32,22 +68,51 @@ export default {
   },
   data () {
     return {
-      showImages: null
+      showImages: null,
+      locations: {type: Array},
+      isStorageVisible: false,
+      newStorage: {
+        boughtAt: new Date().toISOString().substr(0, 10),
+        expiresOn: new Date().toISOString().substr(0, 10),
+        location: null,
+        count: 0,
+        itemID: this.item.id
+      }
     }
   },
   mounted () {
     if(process.client) {
       this.showImages = localStorage.getItem("showImages")
     }
+    this.$root.$on('close-modal', () => {
+      this.closeAddStorage()
+    })
+    this.getLocations()
   },
   methods: {
-      getItemCount() {
-          axios.get(this.$config.apiURL + "/storage/item-count?itemID=" + this.item.id).then(response => {
-            console.log(response.data)
-              this.itemCount = response.data;
-          }).catch(error => { console.log(error.response); });
-      }
+    addStorage(){
+      axios.get(this.$config.apiURL + "/storage", this.newStorage).then(response => {
+        console.log(response.data)
+      }).catch(error => { console.log(error.response); });
     },
+    openAddStorage() {
+      this.isStorageVisible = true
+    },
+    closeAddStorage() {
+      this.isStorageVisible = false
+    },
+    getLocations(){
+        axios.get(this.$config.apiURL + "/location").then(response => {
+          this.locations = response.data;
+        }).catch(error => { console.log(error.response); });
+    },
+    getItemCount() {
+        axios.get(this.$config.apiURL + "/storage/item-count?itemID=" + this.item.id).then(response => {
+          console.log(response.data)
+            this.itemCount = response.data;
+        }).catch(error => { console.log(error.response); });
+    }
+  },
 }
 </script>
 
@@ -91,4 +156,12 @@ export default {
       border-radius 1rem
       padding .5rem
       width: initial
+.storage
+  display: flex
+  flex-direction: column
+  gap .5rem
+  justify-content: center
+  align-items: center
+  .storage-item
+    display block
 </style>

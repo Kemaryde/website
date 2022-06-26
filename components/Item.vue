@@ -5,7 +5,7 @@
     </h2>
     <strong>{{item.barcode}}</strong><br />
     <p>Hersteller: {{item.fracturedBy}}</p>
-    <strong v-show="item.amount != 0 && item.amount != null">Anzahl: {{ item.amount }}</strong>
+    <strong>Anzahl: {{ itemCount }}</strong>
     <div class="placeholder-amount" v-show="item.amount === 0 && item.amount == null"></div>
     <img :src="item.imageURL" alt="" class="image" v-if="showImages == 'true'">
     <div class="placeholder-image" v-show="showImages =='false'"></div>
@@ -17,15 +17,18 @@
         {{ tag.name }}
       </p>
     </div>
+    <button class="edit">Bearbeiten</button>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   props: {
     item: {
       default: {}
-    }
+    },
+    itemCount: 0
   },
   data () {
     return {
@@ -36,7 +39,15 @@ export default {
     if(process.client) {
       this.showImages = localStorage.getItem("showImages")
     }
-  }
+  },
+  methods: {
+      getItemCount() {
+          axios.get(this.$config.apiURL + "/storage/item-count?itemID=" + this.item.id).then(response => {
+            console.log(response.data)
+              this.itemCount = response.data;
+          }).catch(error => { console.log(error.response); });
+      }
+    },
 }
 </script>
 

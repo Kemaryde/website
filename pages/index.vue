@@ -83,10 +83,10 @@ export default {
       sendNewItem () {
         if(this.newItem.name !== '' && this.newItem.facturedBy !== '' && this.newItem.imageURL !== '' && this.newItem.tag !== ''){
           axios.post(this.$config.apiURL + "/item", this.newItem)
-          .then(response => {
-            console.log(response)
+          .then(() => {
+            this.getItems()
           }) .catch(error => {
-            console.log(error)
+            console.log(error.response)
           })
         }
       },
@@ -99,7 +99,7 @@ export default {
       getItems() {
           axios.get(this.$config.apiURL + "/item?tagsAsList").then(response => {
               this.items = response.data;
-          }).catch(error => { console.log(error); });
+          }).catch(error => { console.log(error.response); });
       }
     },
     components: { Popup }

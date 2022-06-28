@@ -1,5 +1,5 @@
 <template>
-  <div class="item" @click.prevent="openAddStorage">
+  <div class="item" @click.prevent="openItemSite">
     <h2 class="title">
       {{ item.name }}
     </h2>
@@ -18,7 +18,7 @@
       </p>
     </div>
     <Popup
-      v-show="isStorageVisible"
+      v-if="isStorageVisible"
       @close-modal="closeAddStorage"
     >
       <div class="storage">
@@ -70,6 +70,7 @@ export default {
     return {
       showImages: null,
       locations: {type: Array},
+      isModalVisible: false,
       isStorageVisible: false,
       newStorage: {
         boughtAt: new Date().toISOString().substr(0, 10),
@@ -84,9 +85,6 @@ export default {
     if(process.client) {
       this.showImages = localStorage.getItem("showImages")
     }
-    this.$root.$on('close-modal', () => {
-      this.closeAddStorage()
-    })
     this.getItemCount()
     this.getLocations()
   },
@@ -96,11 +94,8 @@ export default {
         console.log(response)
       }).catch(error => { console.log(error.response); });
     },
-    openAddStorage() {
-      this.isStorageVisible = true
-    },
-    closeAddStorage() {
-      this.isStorageVisible = false
+    openItemSite(){
+      this.$router.push('/'+ this.item.id)
     },
     getLocations(){
         axios.get(this.$config.apiURL + "/location").then(response => {
@@ -109,7 +104,6 @@ export default {
     },
     getItemCount() {
         axios.get(this.$config.apiURL + "/storage/item-count?itemID=" + this.item.id).then(response => {
-          console.log(response.data)
           this.itemCount = response.data;
         }).catch(error => { console.log(error.response); });
     }
@@ -157,12 +151,5 @@ export default {
       border-radius 1rem
       padding .5rem
       width: initial
-.storage
-  display: flex
-  flex-direction: column
-  gap .5rem
-  justify-content: center
-  align-items: center
-  .storage-item
-    display block
+
 </style>

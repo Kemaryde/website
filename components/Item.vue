@@ -92,7 +92,7 @@ export default {
   methods: {
     addStorage(){
       axios.post(this.$config.apiURL + "/storage", this.newStorage).then(response => {
-        console.log(response.data)
+        console.log(response)
       }).catch(error => { console.log(error.response); });
     },
     openAddStorage() {
@@ -109,7 +109,7 @@ export default {
     getItemCount() {
         axios.get(this.$config.apiURL + "/storage/item-count?itemID=" + this.item.id).then(response => {
           console.log(response.data)
-            this.itemCount = response.data;
+          this.itemCount = response.data;
         }).catch(error => { console.log(error.response); });
     }
   },

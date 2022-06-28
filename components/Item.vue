@@ -87,6 +87,7 @@ export default {
     this.$root.$on('close-modal', () => {
       this.closeAddStorage()
     })
+    this.getItemCount()
     this.getLocations()
   },
   methods: {

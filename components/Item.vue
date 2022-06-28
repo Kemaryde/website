@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     addStorage(){
-      axios.get(this.$config.apiURL + "/storage", this.newStorage).then(response => {
+      axios.post(this.$config.apiURL + "/storage", this.newStorage).then(response => {
         console.log(response.data)
       }).catch(error => { console.log(error.response); });
     },

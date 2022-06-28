@@ -22,7 +22,7 @@ jobs:
         run: docker build . --file Dockerfile --tag registry.jlosch.de/kemary.de/website:${{env.GITHUB_REF_SLUG}}
 
       - name: Publish to Registry
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: elgohr/Publish-Docker-Github-Action@v4
         with:
           registry: https://registry.jlosch.de
           username: ${{ secrets.REGISTRY_NAME }}

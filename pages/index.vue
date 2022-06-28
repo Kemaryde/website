@@ -104,7 +104,7 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-// farbpalette: https://coolors.co/f2e3bc-96bbbb-21231a-c19875
+// farbpalette: https://coolors.co/f2e3bc-96bbbb-21231a-c19875-e3170a-4f772d
 .site-wrapper
   .navigation
     display flex

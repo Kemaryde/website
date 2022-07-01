@@ -18,7 +18,7 @@
     "webpack": "^4.46.0"
   },
   "devDependencies": {
-    "lost": "^8.3.1",
+    "lost": "^9.0.0",
     "rupture": "^0.7.1",
     "stylus": "^0.58.1",
     "stylus-loader": "^4.3.3",

@@ -4,6 +4,7 @@ COPY . .
 RUN npm i
 ENV NUXT_HOST=0.0.0.0
 ENV NUXT_PORT=3000
+ENV BASE_URL=https://beta.app.kemary.de/api
 RUN npm run build_beta_app
 EXPOSE 3000
 ENTRYPOINT ["npm", "start"]

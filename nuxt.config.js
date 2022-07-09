@@ -50,11 +50,6 @@ export default {
   modules: [
     '@nuxtjs/axios',
   ],
-  axios: {
-    // See https://github.com/nuxt-community/axios-module#options
-    baseURL: 'https://test.kemary.de/api'
-  },
-
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

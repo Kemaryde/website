@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   data() {
     return {
@@ -63,13 +62,13 @@ export default {
         const details = {
           "name": this.newLocation
         }
-        axios.post(this.$config.apiURL + "/location", details).then(() => {
+        this.$axios.post("/location", details).then(() => {
           this.getLocations()
         }).catch(error => { console.log(error.response); });
       }
     },
     getLocations(){
-        axios.get(this.$config.apiURL + "/location").then(response => {
+        this.$axios.get("/location").then(response => {
           this.locations = response.data;
         }).catch(error => { console.log(error.response); });
     },

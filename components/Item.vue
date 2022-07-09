@@ -58,7 +58,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   props: {
     item: {
@@ -90,7 +89,7 @@ export default {
   },
   methods: {
     addStorage(){
-      axios.post(this.$config.apiURL + "/storage", this.newStorage).then(response => {
+      this.$axios.post("/storage", this.newStorage).then(response => {
         console.log(response)
       }).catch(error => { console.log(error.response); });
     },
@@ -98,12 +97,12 @@ export default {
       this.$router.push('/'+ this.item.id)
     },
     getLocations(){
-        axios.get(this.$config.apiURL + "/location").then(response => {
+        this.$axios.get(this.$config.apiURL + "/location").then(response => {
           this.locations = response.data;
         }).catch(error => { console.log(error.response); });
     },
     getItemCount() {
-        axios.get(this.$config.apiURL + "/storage/item-count?itemID=" + this.item.id).then(response => {
+        this.$axios.get("/storage/item-count?itemID=" + this.item.id).then(response => {
           this.itemCount = response.data;
         }).catch(error => { console.log(error.response); });
     }

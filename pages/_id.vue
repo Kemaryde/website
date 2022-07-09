@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   props: {
     item: {
@@ -107,22 +106,22 @@ export default {
         this.isStorageVisible = true
     },
     getItems() {
-          axios.get(this.$config.apiURL + "/item?tagsAsList").then(response => {
+          this.$axios.get("/item?tagsAsList").then(response => {
               this.items = response.data;
           }).catch(error => { console.log(error.response); });
     },
     addStorage(){
-      axios.post(this.$config.apiURL + "/storage", this.newStorage).then(response => {
+      this.$axios.post("/storage", this.newStorage).then(response => {
         console.log(response)
       }).catch(error => { console.log(error.response); });
     },
     getLocations(){
-        axios.get(this.$config.apiURL + "/location").then(response => {
+        this.$axios.get("/location").then(response => {
           this.locations = response.data;
         }).catch(error => { console.log(error.response); });
     },
     getItemCount() {
-        axios.get(this.$config.apiURL + "/storage/item-count?itemID=" + this.$route.params.id).then(response => {
+        this.$axios.get("/storage/item-count?itemID=" + this.$route.params.id).then(response => {
           this.itemCount = response.data;
         }).catch(error => { console.log(error.response); });
     }

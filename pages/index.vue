@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Popup from '~/components/Popup.vue'
 export default {
     name: "IndexPage",
@@ -75,7 +74,7 @@ export default {
     methods: {
       sendNewItem () {
         if(this.newItem.name !== '' && this.newItem.facturedBy !== '' && this.newItem.imageURL !== '' && this.newItem.tag !== ''){
-          axios.post(this.$config.apiURL + "/item", this.newItem)
+          this.$axios.post("/item", this.newItem)
           .then(() => {
             this.getItems()
           }) .catch(error => {
@@ -90,7 +89,7 @@ export default {
         this.isAddItemOpen = false;
       },
       getItems() {
-          axios.get(this.$config.apiURL + "/item?tagsAsList").then(response => {
+          this.$axios.get("/item?tagsAsList").then(response => {
               this.items = response.data;
           }).catch(error => { console.log(error.response); });
       }

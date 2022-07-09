@@ -30,7 +30,6 @@ export default {
   ],
   ssr: false,
   publicRuntimeConfig: {
-    apiURL: process.env.API_URL === undefined ? 'https://test.kemary.de/api' : process.env.API_URL
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -46,7 +45,13 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
   ],
+  axios: {
+    // See https://github.com/nuxt-community/axios-module#options
+    baseURL: 'https://test.kemary.de/api'
+  },
+
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

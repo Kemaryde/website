@@ -97,7 +97,7 @@ export default {
       this.$router.push('/'+ this.item.id)
     },
     getLocations(){
-        this.$axios.get(this.$config.apiURL + "/location").then(response => {
+        this.$axios.get("/location").then(response => {
           this.locations = response.data;
         }).catch(error => { console.log(error.response); });
     },

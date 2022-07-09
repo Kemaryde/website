@@ -30,6 +30,9 @@ export default {
   ],
   ssr: false,
   publicRuntimeConfig: {
+    axios: {
+      browserBaseURL: process.env.BASE_URL === undefined ? 'https://test.kemary.de/api' : process.env.BASE_URL
+    }
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

@@ -1,0 +1,49 @@
+name: Docker build
+
+on:
+  push:
+    branches: ["main"]
+
+
+jobs:
+
+  build_latest:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v2
+        
+      - name: Build the Docker image at main
+        run: docker build . --file Dockerfile --tag registry.jlosch.de/kemary.de/website:latest
+
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@v4
+        with:
+          registry: https://registry.jlosch.de
+          username: ${{ secrets.REGISTRY_NAME }}
+          password: ${{ secrets.REGISTRY_TOKEN }}
+          name: registry.jlosch.de/kemary.de/website:latest
+  
+  build_beta:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v2
+        
+      - name: Build the Docker image at main
+        run: docker build . --file Dockerfile-beta --tag registry.jlosch.de/kemary.de/website:beta
+
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@v4
+        with:
+          registry: https://registry.jlosch.de
+          username: ${{ secrets.REGISTRY_NAME }}
+          password: ${{ secrets.REGISTRY_TOKEN }}
+          name: registry.jlosch.de/kemary.de/website:beta
+      

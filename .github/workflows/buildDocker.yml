@@ -6,7 +6,7 @@ on:
 
 jobs:
 
-  build:
+  build_test:
 
     runs-on: ubuntu-latest
     permissions:
@@ -19,7 +19,7 @@ jobs:
         uses: rlespinasse/github-slug-action@v3.x
         
       - name: Build the Docker image at ${{github.GITHUB_REPOSITORY }}
-        run: docker build . --file Dockerfile --tag registry.jlosch.de/kemary.de/website:${{env.GITHUB_REF_SLUG}}
+        run: docker build . --file Dockerfile-test --tag registry.jlosch.de/kemary.de/website:test-${{env.GITHUB_REF_SLUG}}
 
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@v4
@@ -27,4 +27,4 @@ jobs:
           registry: https://registry.jlosch.de
           username: ${{ secrets.REGISTRY_NAME }}
           password: ${{ secrets.REGISTRY_TOKEN }}
-          name: registry.jlosch.de/kemary.de/website:${{env.GITHUB_REF_SLUG}}
+          name: registry.jlosch.de/kemary.de/website:test-${{env.GITHUB_REF_SLUG}}

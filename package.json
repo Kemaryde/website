@@ -4,9 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "build_test": "NUXT_ENV_BASE_URL=https://test.kemary.de/api & nuxt build",
-    "build_app": "NUXT_ENV_BASE_URL=https://app.kemary.de/api & nuxt build",
-    "build_beta_app": "NUXT_ENV_BASE_URL=https://beta.app.kemary.de/api & nuxt build",
+    "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
   },

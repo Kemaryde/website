@@ -19,7 +19,7 @@ jobs:
         uses: rlespinasse/github-slug-action@v3.x
         
       - name: Build the Docker image at ${{github.GITHUB_REPOSITORY }}
-        run: docker build . --file Dockerfile-test --tag registry.jlosch.de/kemary.de/website:test-${{env.GITHUB_REF_SLUG}}
+        run: docker build . --file Dockerfile --tag registry.jlosch.de/kemary.de/website:test-${{env.GITHUB_REF_SLUG}}
 
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@v4

@@ -37,7 +37,7 @@ jobs:
       - uses: actions/checkout@v2
         
       - name: Build the Docker image at main
-        run: docker build . --file Dockerfile-beta --tag registry.jlosch.de/kemary.de/website:beta
+        run: docker build . --file Dockerfile --tag registry.jlosch.de/kemary.de/website:beta
 
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@v4

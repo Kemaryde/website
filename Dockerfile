@@ -4,6 +4,6 @@ COPY . .
 RUN npm i
 ENV NUXT_HOST=0.0.0.0
 ENV NUXT_PORT=3000
-RUN npm run build_app
+RUN npm run build
 EXPOSE 3000
 ENTRYPOINT ["npm", "start"]
